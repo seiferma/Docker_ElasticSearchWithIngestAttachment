@@ -1,0 +1,18 @@
+sudo: false
+language: ruby
+services:
+  - docker
+before_install:
+  - git clone --depth 1 https://github.com/seiferma/Docker_BuildUtils.git /tmp/BuildUtils
+  - . /tmp/BuildUtils/travisSetup.sh
+script:
+  - travisBuildDockerhub.sh
+deploy:
+  provider: script
+  script: travisDeployDockerhub.sh
+  on:
+    branch: master
+env:
+  global: 
+    - IMAGE_NAME=seiferma/elasticsearch-ingestattachment
+    - secure: "Nz6O3idggNOLS/1NIL1nyXVS2jw2xfuK+22eOhgKhHGkfGPrtStih3HnbSjTQWBQYMn+5XqRR1jfFqjm8OEi/BayivpLYH7zDMECPb+c9YlibG0xeklDiBotNgxFMH3eihxlqndkf+SFkw9BEcXRlcTus1H9LGuc/daw3o+nCr5bi9RHkEsZxKpWpA1wXu0nEipPir3QMIKbPDMlCyhYtSUPBiGO+1fnAPVXUqHeS/iUpTRJeTg4k1X0oVTJHVcCLLClAbqBEwGaAX05ogQi6TJXPAXcPLndUqrg7LBh39Y2/7KPLSe9NlW32cVn65l5cXFhIanJnr6lQHhqxqL7opO8kTUyUiHiXWXsi8GUTseWOXVPAlX9VEZu1g8GT8zmaQHXvfizAR5FvIy3txh1R4I1V1kLawR4XJiHr8I5+jVc8X5cnH5VEleQOmA46wwRX9YRkBJlKeRwIRMS2jd1zR4THr8wwHG3DNT9loN+rpYjm4ZGxdVL2SsHWzOF3juMZvZ6Bzvn7FQidCwMGWwpbwPHnI1hDl+xAfoF+6b6Z9g/700Uck72OMDpMlRuzfmnX29ypKZ/NtMvXs5/dlDByeS/4cnsd4InUJTEIj6oCB20jiM5BhVPHa26pWwu/Wx0T7e/pHEW61Qnugvsn+Pg8V+unS5wmcgATof57wcj13M="
